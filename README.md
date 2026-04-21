@@ -1,6 +1,84 @@
 [![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/bMYWKvYv)
 # Interim Assessment: Full-Stack Integration – Coinbase Clone
 
+## Implemented Solution (Frontend + Backend)
+
+This project is now implemented as:
+
+- Frontend (React + Vite): project root
+- Backend (Node + Express + MongoDB): `backend/`
+
+This avoids command conflicts and allows running both services independently.
+
+## Setup Instructions
+
+### 1) Install dependencies
+
+From project root:
+
+```bash
+npm install
+npm install --prefix backend
+```
+
+### 2) Configure environment variables
+
+- Frontend env file: create `.env` from `.env.example`
+- Backend env file: create `backend/.env` from `backend/.env.example`
+
+Use your MongoDB Atlas URI in `backend/.env`:
+
+```env
+MONGODB_URI=mongodb+srv://oppongakwasichristopher_db_user:<db_password>@cluster0.7zbubf2.mongodb.net/coinbase_clone?retryWrites=true&w=majority&appName=Cluster0
+JWT_SECRET=replace_with_a_long_random_secret
+JWT_EXPIRES_IN=7d
+PORT=5000
+FRONTEND_URL=http://localhost:5173
+```
+
+For frontend:
+
+```env
+VITE_API_URL=http://localhost:5000
+```
+
+### 3) Run both apps
+
+Option A: one command from root
+
+```bash
+npm run dev:full
+```
+
+Option B: separate terminals
+
+```bash
+# terminal 1 (frontend)
+npm run dev
+
+# terminal 2 (backend)
+npm run dev --prefix backend
+```
+
+## Implemented API Endpoints
+
+Authentication:
+
+- `POST /register`
+- `POST /login`
+- `GET /profile` (protected)
+- `POST /logout`
+
+Crypto:
+
+- `GET /crypto`
+- `GET /crypto/gainers`
+- `GET /crypto/new`
+- `GET /crypto/:id`
+- `POST /crypto` (protected)
+
+Note: Although the assignment text labels register/login as GET, account creation and login are implemented as secure POST endpoints.
+
 In this assignment, you will integrate your cloned coinbase frontend with a backend API to build a functional cryptocurrency platform with authentication and dynamic data.
 
 You are required to implement the features using Node.js with MongoDB as the database. Create proper data models (schemas) and structure your project using best practices (models, routes, and controllers). All features must be exposed through RESTful APIs for the frontend to consume.
